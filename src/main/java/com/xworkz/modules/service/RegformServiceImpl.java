@@ -5,6 +5,8 @@ import com.xworkz.modules.dto.RegFormDto;
 import com.xworkz.modules.entity.RegFormEntity;
 import com.xworkz.modules.passwordGen.PasswordGenerator;
 import com.xworkz.modules.repository.RegformRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 
 @Service
 public class RegformServiceImpl implements RegformService{
+    private static final Logger log = LoggerFactory.getLogger(RegformServiceImpl.class);
     boolean isvalid=true;
 
     @Autowired
@@ -62,7 +65,9 @@ public class RegformServiceImpl implements RegformService{
             EmailSender.emailSender(regFormDto.getEmail(),password);
             regFormEntity.setCreatedBy(regFormDto.getName());
             regFormEntity.setCreatedTime(LocalDateTime.now());
+            log.info("data valid");
             return regformRepo.save(regFormEntity);
+
 
         }
         else {
