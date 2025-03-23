@@ -131,7 +131,7 @@
     <!-- Registration Form -->
     <div class="form-container">
         <h1>Registration Form</h1>
-        <form action="regdata" method="post" enctype="multipart/form-data">
+        <form action="regData" method="post">
             <div class="error">
             <c:out value="${nameError}"/>
              </div>
@@ -141,7 +141,7 @@
 
             <span id="iderror"></span>
             <label for="login">Login ID:</label>
-            <input type="text"  id="loginid" name="loginid" onChange="onloginid()" value="${dto.loginId}" required>
+            <input type="text"  id="loginid" name="loginId" onChange="onloginid()" value="${dto.loginId}" required>
 
             <span id="emailerror"></span>
             <label for="email">Email:</label>
@@ -176,8 +176,6 @@
                <option>${location}</option>
                </c:forEach>
             </select>
-            <lable>Profile picture</lable>
-            <input type="file" name="multipartFile" id="multipartFile" />
 
             <button type="submit">Submit</button>
         </form>

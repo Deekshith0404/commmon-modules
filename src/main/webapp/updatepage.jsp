@@ -128,7 +128,7 @@
 
     <div class="form-container">
         <h1>Update Form</h1>
-        <form action="updateform" method="post">
+        <form action="updateform" method="post"  enctype="multipart/form-data">
             <div class="error">
             <c:out value="${nameError}"/>
              </div>
@@ -167,6 +167,8 @@
                <option>${location}</option>
                </c:forEach>
             </select>
+                       <lable>Profile picture</lable>
+                        <input type="file" name="multipartFile" id="multipartFile" />
 
             <button type="submit">Update</button>
         </form>

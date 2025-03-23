@@ -119,7 +119,7 @@
     ${pass}
     ${time}
     </div>
-    <form action="login">
+    <form action="login" method>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
@@ -128,15 +128,10 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required>
       </div>
-      <div class="form-group">
-      <a href="login?usercap=${captcha}" class="button-style" value="submit">Login</a>
-      </div>
-      <div class="form-group">
-          <button type="button" onclick="" style="background-color: light-blue ; color: white;">Forgot Password</button>
-        </div>
+
         <div class="form-group">
           <label for="captcha">
-          <input type="text" name="captcha" value="${captcha}" hidden </input>
+          <input type="text" name="usercap" value="${captcha}" hidden </input>
             captcha:
             <span style="cursor: pointer;" onclick="fetch('startlogin', { method: 'GET' }).then(() => location.reload())">
               &#x21bb;
@@ -145,6 +140,12 @@
           </label>
           <input type="text" id="captcha" name="captcha" required>
         </div>
+          <div class="form-group">
+              <button type="submit" class="button-style" value="submit">Login</button>
+              </div>
+              <div class="form-group">
+                  <button type="button" onclick="" style="background-color: light-blue ; color: white;">Forgot Password</button>
+                </div>
     </form>
   </div>
 </body>

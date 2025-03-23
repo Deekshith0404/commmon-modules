@@ -6,7 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
@@ -42,11 +44,18 @@ public class SpringConfig {
         dm.setPassword("root");
         return dm;
     }
-    @Bean(name = "multipartResolver")
-    public CommonsMultipartResolver getCommonsMultipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(20971520);
-        multipartResolver.setMaxInMemorySize(1048576);
-        return multipartResolver;
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
     }
+
+
+//    @Bean(name = "multipartResolver")
+//    public CommonsMultipartResolver getCommonsMultipartResolver() {
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+////        multipartResolver.setMaxUploadSize(20971520);
+////        multipartResolver.setMaxInMemorySize(1048576);
+//        return multipartResolver;
+//    }
 }

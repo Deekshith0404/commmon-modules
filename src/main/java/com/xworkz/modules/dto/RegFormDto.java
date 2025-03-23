@@ -18,13 +18,12 @@ public class RegFormDto {
     @Max(value = 10,message = "max should be 10")
     private String loginId;
     private String password;
-    private String confirmPassword;
     private String email;
     private Integer age;
     private Long phoneNumber;
     private String dateofBirth;
     private String location;
     private String profile;
-    private MultipartFile multipartFile;
+//    private MultipartFile multipartFile;
 
 }

@@ -8,6 +8,7 @@ import com.xworkz.modules.service.RegformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class ModuleController {
         return "register.jsp";
     }
 
-    @RequestMapping("updateprofile")
+    @RequestMapping(value = "updateprofile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String updateForm(@RequestParam("email")String email,Model model){
         RegFormEntity regFormEntity =regformService.getIdByEmail(email);
         if (regFormEntity!=null){
@@ -49,24 +50,21 @@ public class ModuleController {
 
     }
 
-    @PostMapping("regdata")
-    public String RegformSubmit(@RequestBody RegFormDto regFormDto, Model model){
-        System.out.println(regFormDto.getMultipartFile().getOriginalFilename());
-        System.out.println(regFormDto.getProfile());
-//           boolean isvalid= regformService.save(regFormDto,model);
-//           if (isvalid){
-//               model.addAttribute("dto",regFormDto);
-//               return "registrationsuccess.jsp";
-//           }else {
-//               List<LocationEnum> list=new ArrayList<>(Arrays.asList(LocationEnum.values()));
-//               model.addAttribute("list",list);
-//               model.addAttribute("dto",regFormDto);
-//               return "register.jsp";
-//           }
-            return "hello";
+    @PostMapping("regData")
+    public String RegformSubmit( RegFormDto regFormDto, Model model){
+           boolean isvalid= regformService.save(regFormDto,model);
+           if (isvalid){
+               model.addAttribute("dto",regFormDto);
+               return "registrationsuccess.jsp";
+           }else {
+               List<LocationEnum> list=new ArrayList<>(Arrays.asList(LocationEnum.values()));
+               model.addAttribute("list",list);
+               model.addAttribute("dto",regFormDto);
+               return "register.jsp";
+           }
     }
     @RequestMapping("login")
-    public String login(@RequestParam("usercap") String usercap,String captcha,String email,String password,Model model){
+    public String login( String email,String password,String captcha,String usercap,Model model){
             if (usercap.equals(captcha)){
         int result1=regformService.login(email,password,model);
         if (result1==-1){
@@ -101,7 +99,7 @@ public class ModuleController {
         }
 
     }
-    @PostMapping("updateform")
+    @RequestMapping("updateform")
     public String updateform(RegFormDto regFormDto,Model model){
 
         boolean isvalid= regformService.updateprofile(regFormDto,model);
