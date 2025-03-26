@@ -45,17 +45,20 @@ public class SpringConfig {
         return dm;
     }
 
+
+
+//
+//    @Bean
+//    public CommonsMultipartResolver getCommonsMultipartResolver() {
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+//        multipartResolver.setMaxUploadSize(20971520);
+//        multipartResolver.setMaxInMemorySize(1048576);
+//        return multipartResolver;
+//    }
+
     @Bean
-    public MultipartResolver multipartResolver() {
+    public MultipartResolver multipartResolver(){
         return new StandardServletMultipartResolver();
     }
 
-
-//    @Bean(name = "multipartResolver")
-//    public CommonsMultipartResolver getCommonsMultipartResolver() {
-//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-////        multipartResolver.setMaxUploadSize(20971520);
-////        multipartResolver.setMaxInMemorySize(1048576);
-//        return multipartResolver;
-//    }
 }

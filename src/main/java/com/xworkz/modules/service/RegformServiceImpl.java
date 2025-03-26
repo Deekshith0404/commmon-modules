@@ -65,7 +65,9 @@ public class RegformServiceImpl implements RegformService{
             EmailSender.emailSender(regFormDto.getEmail(),password);
             regFormEntity.setCreatedBy(regFormDto.getName());
             regFormEntity.setCreatedTime(LocalDateTime.now());
+            regFormEntity.setProfile(regFormDto.getProfile());
             log.info("data valid");
+            System.out.println(regFormDto.getProfile());
             return regformRepo.save(regFormEntity);
 
 

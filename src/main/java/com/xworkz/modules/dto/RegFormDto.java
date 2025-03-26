@@ -24,6 +24,7 @@ public class RegFormDto {
     private String dateofBirth;
     private String location;
     private String profile;
-//    private MultipartFile multipartFile;
+    private MultipartFile multipartFile;
+
 
 }

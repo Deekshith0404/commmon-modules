@@ -256,5 +256,27 @@ public class RegformRepoImpl implements RegformRepo {
             }
         }
     }
+
+    @Override
+    public boolean updateform(RegFormEntity regFormEntity) {
+        EntityManager entityManager=entityManagerFactory.createEntityManager();
+        try {
+            if (regFormEntity!=null){
+                entityManager.getTransaction().begin();
+                entityManager.merge(regFormEntity);
+                entityManager.getTransaction().commit();
+                return true;
+            }
+            return false;
+        }catch (Exception e){
+            log.error(e.getMessage());
+            entityManager.getTransaction().rollback();
+            return false;
+        }finally {
+            if (entityManager!=null){
+                entityManager.close();
+            }
+        }
+    }
 }
 

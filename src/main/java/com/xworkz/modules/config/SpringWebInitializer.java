@@ -38,4 +38,5 @@ public class SpringWebInitializer extends AbstractAnnotationConfigDispatcherServ
         registration.setMultipartConfig(multipartConfigElement);
 
     }
+
 }

@@ -131,7 +131,10 @@
     <!-- Registration Form -->
     <div class="form-container">
         <h1>Registration Form</h1>
-        <form action="regData" method="post">
+        <form action="reg" method="post" enctype="multipart/form-data">
+        <label for="multipartFile" >profile</label>
+        <input type="file" name="multipartFile" id="profile" required>
+
             <div class="error">
             <c:out value="${nameError}"/>
              </div>
@@ -223,7 +226,7 @@ console.log(emailvalue)
 
     if (emailvalue!=="") {
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET","http://localhost:8080/commmon-modules/email?email="+emailvalue);
+    xhttp.open("GET","http://localhost:8090/commmon-modules/email?email="+emailvalue);
     xhttp.send();
 
     xhttp.onload = function(){
@@ -240,7 +243,7 @@ console.log(idvalue)
 var xhttp = new XMLHttpRequest();
 
     if (idvalue!=="") {
-    xhttp.open("GET","http://localhost:8080/commmon-modules/loginid/"+idvalue);
+    xhttp.open("GET","http://localhost:8090/commmon-modules/loginid/"+idvalue);
     xhttp.send();
 
     xhttp.onload = function(){

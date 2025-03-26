@@ -14,4 +14,5 @@ public interface RegformRepo {
     Long emailcount(String email);
     boolean deleteByEmail(String email);
     Long loginidcount(String loginId);
+    boolean updateform(RegFormEntity regFormEntity);
 }

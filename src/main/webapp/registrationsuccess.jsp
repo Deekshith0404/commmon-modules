@@ -80,6 +80,7 @@
             padding: 20px;
             text-align: center;
         }
+
     </style>
 </head>
 <body>
@@ -94,8 +95,6 @@
             <a href="#">About</a>
             <a href="#">Contact</a>
         </div>
-
-        <!-- Right Links -->
         <div class="menu-right">
             <a href="updateprofile?email=${dto.email}">Update Profile</a>
             <a href="index.jsp">logout</a>

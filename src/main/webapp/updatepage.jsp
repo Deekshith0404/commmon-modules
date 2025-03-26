@@ -113,6 +113,13 @@
         form button:hover {
             background: #003d80;
         }
+
+            img{
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
     </style>
 </head>
 <body>
@@ -125,9 +132,10 @@
         </div>
     </div>
 
-
     <div class="form-container">
         <h1>Update Form</h1>
+                 <img src="download?profile=${dto.getProfile()}" alt="profile">
+
         <form action="updateform" method="post"  enctype="multipart/form-data">
             <div class="error">
             <c:out value="${nameError}"/>
@@ -167,8 +175,10 @@
                <option>${location}</option>
                </c:forEach>
             </select>
-                       <lable>Profile picture</lable>
-                        <input type="file" name="multipartFile" id="multipartFile" />
+
+
+            <lable>Profile picture</lable>
+            <input type="file" name="multipartFile" id="multipartFile" />
 
             <button type="submit">Update</button>
         </form>

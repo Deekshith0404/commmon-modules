@@ -5,6 +5,7 @@ import com.xworkz.modules.entity.RegFormEntity;
 import com.xworkz.modules.constrants.LocationEnum;
 import com.xworkz.modules.passwordGen.PasswordGenerator;
 import com.xworkz.modules.service.RegformService;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,14 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,13 +43,15 @@ public class ModuleController {
         return "register.jsp";
     }
 
-    @RequestMapping(value = "updateprofile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @RequestMapping(value = "updateprofile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @GetMapping("updateprofile")
     public String updateForm(@RequestParam("email")String email,Model model){
         RegFormEntity regFormEntity =regformService.getIdByEmail(email);
         if (regFormEntity!=null){
             List<LocationEnum> list=new ArrayList<>(Arrays.asList(LocationEnum.values()));
             model.addAttribute("list",list);
             model.addAttribute("dto",regFormEntity);
+            model.addAttribute("pic",regFormEntity.getProfile());
             return "updatepage.jsp";
         }else {
             model.addAttribute("data","data not found");
@@ -50,8 +60,17 @@ public class ModuleController {
 
     }
 
-    @PostMapping("regData")
-    public String RegformSubmit( RegFormDto regFormDto, Model model){
+    @PostMapping("reg")
+    public String RegformSubmit(RegFormDto regFormDto, Model model) throws IOException {
+//            String filename=regFormDto.getMultipartFile().getOriginalFilename();
+
+        byte[] bytes=regFormDto.getMultipartFile().getBytes();
+        Path path= Paths.get("E:\\commons\\"+regFormDto.getName() +System.currentTimeMillis());
+        Files.write(path,bytes);
+        String filename=path.getFileName().toString();
+        regFormDto.setProfile(filename);
+        System.out.println("this is file===========");
+//        System.out.println(file.getOriginalFilename());
            boolean isvalid= regformService.save(regFormDto,model);
            if (isvalid){
                model.addAttribute("dto",regFormDto);
@@ -63,6 +82,7 @@ public class ModuleController {
                return "register.jsp";
            }
     }
+
     @RequestMapping("login")
     public String login( String email,String password,String captcha,String usercap,Model model){
             if (usercap.equals(captcha)){
@@ -129,5 +149,17 @@ public class ModuleController {
         String captha=PasswordGenerator.generatePassword(6);
             model.addAttribute("captcha",captha);
             return "login.jsp";
+    }
+
+    @GetMapping("download")
+    public void download(HttpServletResponse response,@RequestParam("profile") String profile) throws IOException {
+            response.setContentType("image/jpg");
+        File file=new File("E:\\commons\\"+profile);
+        InputStream in=new BufferedInputStream(new FileInputStream(file));
+        ServletOutputStream out = response.getOutputStream();
+        IOUtils.copy(in,out);
+        response.flushBuffer();
+
+//        "E:\commons\Deekshit1742979555722"
     }
 }
