@@ -73,7 +73,7 @@ public class ModuleController {
 //        System.out.println(file.getOriginalFilename());
            boolean isvalid= regformService.save(regFormDto,model);
            if (isvalid){
-               model.addAttribute("dto",regFormDto);
+               model.addAttribute(  "dto",regFormDto);
                return "registrationsuccess.jsp";
            }else {
                List<LocationEnum> list=new ArrayList<>(Arrays.asList(LocationEnum.values()));

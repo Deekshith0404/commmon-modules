@@ -178,7 +178,7 @@ public class RegformServiceImpl implements RegformService{
             regFormEntity.setEmail(regFormDto.getEmail());
             regFormEntity.setUpdatedBy(regFormDto.getName());
             regFormEntity.setUpdatedTime(LocalDateTime.now());
-            return regformRepo.save(regFormEntity);
+            return regformRepo.updateform(regFormEntity);
         }
         else {
             return false;
