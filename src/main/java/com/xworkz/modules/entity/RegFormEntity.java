@@ -16,6 +16,7 @@ import java.util.Date;
 @NamedQuery(name = "timelock",query = "update RegFormEntity u SET u.loginTimeOut =:time  WHERE u.email =:email")
 @NamedQuery(name = "countEmailOccurrences",query = "SELECT COUNT(e.email) FROM RegFormEntity e WHERE e.email = :email")
 @NamedQuery(name = "idcount",query = "SELECT COUNT(e.loginId) FROM RegFormEntity e WHERE e.loginId = :loginId")
+@NamedQuery(name = "idcount",query = "SELECT COUNT(e.loginId) FROM RegFormEntity e WHERE e.loginId = :loginId")
 
 @NamedQuery(
         name = "deletebyemail",
