@@ -31,6 +31,9 @@
     .button-style:hover {
       background-color: #0056b3;
     }
+    .button-style:hover {
+          background-color: #0056b3;
+        }
 
     .menu-bar {
       background-color: #333;

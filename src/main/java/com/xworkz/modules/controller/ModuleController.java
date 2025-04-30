@@ -156,7 +156,7 @@ public class ModuleController {
             response.setContentType("image/jpg");
         File file=new File("E:\\commons\\"+profile);
         InputStream in=new BufferedInputStream(new FileInputStream(file));
-        ServletOutputStream out = response.getOutputStream();
+        ServletOutputStream out = response.getOutputStream( );
         IOUtils.copy(in,out);
         response.flushBuffer();
 
